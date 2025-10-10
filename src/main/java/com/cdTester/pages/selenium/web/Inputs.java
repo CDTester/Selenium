@@ -4,12 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import com.cdTester.utils.ConfigReader;
 
 public class Inputs {
   WebDriver driver;
-
-  protected String URL = ConfigReader.getBaseUrl() + "selenium/web/inputs.html";
 
   @FindBy(tagName = "h1")
   public WebElement header1;
@@ -85,9 +82,7 @@ public class Inputs {
 
 
   public Inputs(WebDriver driver) {
-    String URL = this.URL;
     this.driver = driver;
-    driver.get(URL);
     PageFactory.initElements(driver, this);
   }
 

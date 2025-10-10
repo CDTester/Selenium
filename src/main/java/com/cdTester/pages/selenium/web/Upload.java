@@ -10,8 +10,6 @@ import java.io.File;
 public class Upload {
   WebDriver driver;
 
-  protected String URL = "https://the-internet.herokuapp.com/upload";
-
   @FindBy(css = "input[type=file]")
   WebElement chooseFileButton;
 
@@ -22,9 +20,7 @@ public class Upload {
   WebElement uploadButton;
 
   public Upload(WebDriver driver) {
-    String URL = this.URL;
     this.driver = driver;
-    driver.get(URL);
     PageFactory.initElements(driver, this);
   }
 

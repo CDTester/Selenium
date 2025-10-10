@@ -1,6 +1,7 @@
 package com.cdTester.tests.seleniumhq.elements;
 
 import com.cdTester.pages.selenium.web.Login;
+import com.cdTester.pages.selenium.web.Urls;
 import com.cdTester.tests.seleniumhq.BaseTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +20,7 @@ public class LoginTest extends BaseTest {
   @BeforeEach
   public void createSession() {
     driver = startChromeDriver(1);
+    driver.get(Urls.login);
     loginPage = new Login(driver);
     wait = new WebDriverWait(driver, Duration.ofSeconds(10));
   }
@@ -68,7 +70,5 @@ public class LoginTest extends BaseTest {
     System.out.println("Login Message: " + status);
     assertEquals("You have successfully logged in.", status, "Login message not as expected");
   }
-
-
 
 }

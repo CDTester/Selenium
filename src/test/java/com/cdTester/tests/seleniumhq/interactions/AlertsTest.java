@@ -1,6 +1,7 @@
 package com.cdTester.tests.seleniumhq.interactions;
 
 import com.cdTester.pages.selenium.web.Alerts;
+import com.cdTester.pages.selenium.web.Urls;
 import com.cdTester.tests.seleniumhq.BaseTest;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
@@ -18,6 +19,7 @@ public class AlertsTest extends BaseTest {
   @BeforeEach
   public void createSession() {
     driver = startChromeDriver(1);
+    driver.get(Urls.alerts);
     alertsPage = new Alerts(driver);
     wait = new WebDriverWait(driver, Duration.ofSeconds(10));
   }

@@ -1,7 +1,8 @@
 package com.cdTester.tests.seleniumhq.elements;
 
-import com.cdTester.tests.seleniumhq.BaseChromeTest;
+import com.cdTester.pages.selenium.web.Urls;
 import com.cdTester.pages.selenium.web.Upload;
+import com.cdTester.tests.seleniumhq.BaseChromeTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,8 @@ public class FileUploadTest extends BaseChromeTest {
   @Test
   @DisplayName("Should be able to Upload a fileName")
   public void fileUploadTest() {
+    driver = startChromeDriver(1);
+    driver.get(Urls.upload);
     Upload uploadPage = new Upload(driver);
 
     /* The following is replaced by Page Object Model

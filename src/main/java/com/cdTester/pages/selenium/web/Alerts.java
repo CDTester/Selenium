@@ -1,6 +1,5 @@
 package com.cdTester.pages.selenium.web;
 
-import com.cdTester.utils.ConfigReader;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,11 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 public class Alerts {
   public WebDriver driver;
-
-  protected String URL = ConfigReader.getBaseUrl() + "selenium/web/alerts.html";
 
   @FindBy(id = "alert")
   public WebElement alertLink;
@@ -43,9 +39,7 @@ public class Alerts {
   public By nestedIframeWindow = By.name("iframeWithIframe");
 
   public Alerts(WebDriver driver) {
-    String URL = this.URL;
     this.driver = driver;
-    driver.get(URL);
     PageFactory.initElements(driver, this);
   }
 
