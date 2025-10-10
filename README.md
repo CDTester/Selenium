@@ -297,7 +297,7 @@ mvn test
 or to run a specific class
 
 ```bash
-mvn  -Denv=dev -Dtest="com.cdTester.tests.seleniumhq.interactions.InteractionsTest" test surefire-report:report
+mvn  -Denv=dev -Dtest="com.cdTester.tests.seleniumhq.interactions.driverTest" test surefire-report:report
 ```
 
 mvn exec:java -D"exec.mainClass"="dev.selenium.getting_started.FirstScript" -D"exec.classpathScope"=test -Denv=dev
