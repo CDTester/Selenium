@@ -3,6 +3,7 @@ package com.cdTester.pages.selenium.web;
 import com.cdTester.utils.ConfigReader;
 
 public class Urls {
+  public static String base = ConfigReader.getBaseUrl();
   public static String alerts = ConfigReader.getBaseUrl() + "selenium/web/alerts.html";
   public static String formPage = ConfigReader.getBaseUrl() + "selenium/web/formPage.html";
   public static String frames = ConfigReader.getBaseUrl() + "selenium/web/iframes.html";
