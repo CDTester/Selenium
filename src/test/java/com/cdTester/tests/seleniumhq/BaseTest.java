@@ -71,6 +71,7 @@ public class BaseTest {
 
   protected ChromeDriver startChromeDriver(ChromeOptions options) {
     driver = new ChromeDriver(options);
+    driver.manage().window().maximize();
     return (ChromeDriver) driver;
   }
 
