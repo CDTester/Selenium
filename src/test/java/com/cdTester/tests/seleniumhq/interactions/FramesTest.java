@@ -33,7 +33,7 @@ public class FramesTest extends BaseTest {
 
   @Test
   @DisplayName("Should switch to iFrame using id")
-  public void iframeWithId() {
+  public void iframeWithId() throws InterruptedException {
 
     String title = framesPage.getTitle();
     assertEquals("This page has iframes", title);
@@ -45,8 +45,8 @@ public class FramesTest extends BaseTest {
 
     FormPage forms = new FormPage(framesPage.driver);
     WebElement emailInput = forms.loginFormEmailInput;
-    emailInput.sendKeys("admin@selenium.dev");
-    emailInput.clear();
+    forms.type(emailInput, "admin@selenium.dev");
+    forms.clearText(emailInput);
 
     // exit current iframe
     driver.switchTo().defaultContent();
@@ -54,7 +54,7 @@ public class FramesTest extends BaseTest {
 
   @Test
   @DisplayName("Should switch to iFrame using name")
-  public void iframeWithName() {
+  public void iframeWithName() throws InterruptedException {
     String title = framesPage.getTitle();
     assertEquals("This page has iframes", title);
 
@@ -65,8 +65,8 @@ public class FramesTest extends BaseTest {
 
     FormPage forms = new FormPage(framesPage.driver);
     WebElement emailInput = forms.loginFormEmailInput;
-    emailInput.sendKeys("admin@selenium.dev");
-    emailInput.clear();
+    forms.type(emailInput, "admin@selenium.dev");
+    forms.clearText(emailInput);
 
     // exit current iframe
     driver.switchTo().defaultContent();
@@ -74,7 +74,7 @@ public class FramesTest extends BaseTest {
 
   @Test
   @DisplayName("Should switch to iFrame using index")
-  public void iframeWithIndex() {
+  public void iframeWithIndex() throws InterruptedException {
     String title = framesPage.getTitle();
     assertEquals("This page has iframes", title);
 
@@ -84,9 +84,9 @@ public class FramesTest extends BaseTest {
     assertEquals("We Leave From Here", iframeTitle);
 
     FormPage forms = new FormPage(framesPage.driver);
-    WebElement emailInput = forms.loginFormAgeInput;
-    emailInput.sendKeys("21");
-    emailInput.clear();
+    WebElement ageInputInput = forms.loginFormAgeInput;
+    forms.type(ageInputInput, "21");
+    forms.clearText(ageInputInput);
 
     //leave frame
     driver.switchTo().defaultContent();

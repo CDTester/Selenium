@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import static com.cdTester.utils.Highlight.*;
+
 
 public class FormPage {
   public WebDriver driver;
@@ -23,6 +25,20 @@ public class FormPage {
     PageFactory.initElements(driver, this);
   }
 
+  public void click(WebElement element) throws InterruptedException {
+    highlightElement(this.driver, element);
+    element.click();
+  }
+
+  public void type(WebElement element, String text) throws InterruptedException {
+    highlightElement(this.driver, element);
+    element.sendKeys(text);
+  }
+
+  public void clearText(WebElement element) throws InterruptedException {
+    highlightElement(this.driver, element);
+    element.click();
+  }
 
   public String getUrl() {
     return this.driver.getCurrentUrl();

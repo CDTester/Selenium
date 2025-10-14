@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import static com.cdTester.utils.Highlight.*;
 
 public class Alerts {
   public WebDriver driver;
@@ -43,14 +44,22 @@ public class Alerts {
     PageFactory.initElements(driver, this);
   }
 
-  public String getAlertMessage() {
+  public void click(WebElement element) throws InterruptedException {
+    highlightElement(this.driver, element);
+    element.click();
+  }
+
+  public String getAlertMessage() throws InterruptedException {
     Alert alert = this.driver.switchTo().alert();
+    Thread.sleep(500);
     return alert.getText();
   }
 
-  public String getAlertMessageAndClose(String acceptDismiss) {
+  public String getAlertMessageAndClose(String acceptDismiss) throws InterruptedException {
     Alert alert = this.driver.switchTo().alert();
     String message = alert.getText();
+    Thread.sleep(500);
+
     if (acceptDismiss == "accept") {
       alert.accept();
     }
@@ -60,9 +69,10 @@ public class Alerts {
     return message;
   }
 
-  public void sendKeysToAlertAndClose(String text, String acceptDismiss) {
+  public void sendKeysToAlertAndClose(String text, String acceptDismiss) throws InterruptedException {
     Alert alert = this.driver.switchTo().alert();
     alert.sendKeys(text);
+    Thread.sleep(500);
     if (acceptDismiss == "accept") {
       alert.accept();
     }

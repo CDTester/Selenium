@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebElement;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,32 +29,38 @@ public class InteractionTest extends BaseTest {
 
   @Test
   @DisplayName("should be able to click on a checkbox")
-  public void clickCheckbox() {
-    boolean isSelected = inputPage.checkboxInput.isSelected();
-    assertTrue(isSelected, "Expected checkbox to be selected");
-    inputPage.checkboxInput.click();
-    isSelected = inputPage.checkboxInput.isSelected();
-    assertFalse(isSelected, "Expected checkbox to be unselected");
+  public void clickCheckbox() throws InterruptedException {
+    WebElement checkbox = inputPage.highlightElement(inputPage.checkboxInput);
+    assertTrue(checkbox.isSelected(), "Expected checkbox to be selected");
+
+    checkbox.click();
+    assertFalse(checkbox.isSelected(), "Expected checkbox to be unselected");
   }
 
   @Test
   @DisplayName("Should be able to clear the text from an input field")
-  public void clearText() {
-    inputPage.emailInput.clear();
+  public void clearText() throws InterruptedException {
+    WebElement email = inputPage.highlightElement(inputPage.emailInput);
+    email.clear();
 
-    String emailInputValue = inputPage.emailInput.getAttribute("value");
-    assertEquals("", emailInputValue, "Email value not as expected");
+    assertEquals("",
+            email.getAttribute("value"),
+            "Email value not as expected"
+    );
   }
 
   @Test
   @DisplayName("Should be able to enter text in an input field")
-  public void isEnabled() {
+  public void isEnabled() throws InterruptedException {
+    WebElement input = inputPage.highlightElement(inputPage.emailInput);
     String email = "admin@localhost.dev";
-    inputPage.emailInput.clear();
-    inputPage.emailInput.sendKeys(email);
+    input.clear();
+    input.sendKeys(email);
 
-    String emailInputValue = inputPage.emailInput.getAttribute("value");
-    assertEquals(email, emailInputValue, "Email value not as expected");
+    assertEquals(email,
+            input.getAttribute("value"),
+            "Email value not as expected"
+    );
   }
 
 }

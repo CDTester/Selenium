@@ -31,8 +31,8 @@ public class AlertsTest extends BaseTest {
 
   @Test
   @DisplayName("Should be able to get text from alert and accept it")
-  public void alertInformationTest() {
-    alertsPage.alertLink.click();
+  public void alertInformationTest() throws InterruptedException {
+    alertsPage.click(alertsPage.alertLink);
 
     wait.until(ExpectedConditions.alertIsPresent());
     String alertMessage = alertsPage.getAlertMessageAndClose("accept");
@@ -41,8 +41,8 @@ public class AlertsTest extends BaseTest {
 
   @Test
   @DisplayName("Should be able to accept an empty alert")
-  public void alertEmptyInformationTest() {
-    alertsPage.emptyAlertLink.click();
+  public void alertEmptyInformationTest() throws InterruptedException {
+    alertsPage.click(alertsPage.emptyAlertLink);
 
     wait.until(ExpectedConditions.alertIsPresent());
     String alertMessage = alertsPage.getAlertMessageAndClose("accept");
@@ -51,8 +51,8 @@ public class AlertsTest extends BaseTest {
 
   @Test
   @DisplayName("Should be able to enter text into a prompt and accept it")
-  public void promptDisplayAndInputTest() {
-    alertsPage.promptLink.click();
+  public void promptDisplayAndInputTest() throws InterruptedException {
+    alertsPage.click(alertsPage.promptLink);
 
     //Wait for the alert to be displayed and store it in a variable
     wait.until(ExpectedConditions.alertIsPresent());
@@ -62,79 +62,65 @@ public class AlertsTest extends BaseTest {
 
   @Test
   @DisplayName("Should not be able to read the default text in a prompt")
-  public void promptDefaultInputTest() {
-    alertsPage.promptWithDefaultLink.click();
+  public void promptDefaultInputTest() throws InterruptedException {
+    alertsPage.click(alertsPage.promptWithDefaultLink);
 
     wait.until(ExpectedConditions.alertIsPresent());
     String alertMessage = alertsPage.getAlertMessageAndClose("accept");
-    assertEquals("Enter something",
-            alertMessage,
-            "Alert message not as expected");
-    assertNotEquals("This is a default value",
-            alertMessage,
-            "Should not have got the default prompt message");
+    assertEquals("Enter something", alertMessage, "Alert message not as expected");
+    assertNotEquals("This is a default value", alertMessage, "Should not have got the default prompt message");
   }
 
   @Test
   @DisplayName("Should be able to enter text into multiple prompts and accept them")
-  public void multiplePromptInputsTest() {
-    alertsPage.doublePromptLink.click();
+  public void multiplePromptInputsTest() throws InterruptedException {
+    alertsPage.click(alertsPage.doublePromptLink);
     wait.until(ExpectedConditions.alertIsPresent());
 
-    assertEquals("First",
-            alertsPage.getAlertMessage(),
-            "Alert message not as expected");
+    assertEquals("First", alertsPage.getAlertMessage(), "Alert message not as expected");
     alertsPage.sendKeysToAlertAndClose("first", "accept");
 
-    assertEquals("Second",
-            alertsPage.getAlertMessage(),
-            "Alert message not as expected");
+    assertEquals("Second", alertsPage.getAlertMessage(), "Alert message not as expected");
     alertsPage.sendKeysToAlertAndClose("second", "accept");
   }
 
   @Test
   @DisplayName("Should be able to handle a delayed alert")
-  public void slowAlertTest() {
-    alertsPage.slowAlertLink.click();
+  public void slowAlertTest() throws InterruptedException {
+    alertsPage.click(alertsPage.slowAlertLink);
     wait.until(ExpectedConditions.alertIsPresent());
     assertEquals("Slow", alertsPage.getAlertMessageAndClose("accept"));
   }
 
   @Test
   @DisplayName("Should be able to accept a confirmation alert that redirects to another URL")
-  public void confirmationAlertTest() {
-    alertsPage.confirmAlertLink.click();
+  public void confirmationAlertTest() throws InterruptedException {
+    alertsPage.click(alertsPage.confirmAlertLink);
     wait.until(ExpectedConditions.alertIsPresent());
-    assertEquals("Are you sure?",
-            alertsPage.getAlertMessageAndClose("accept"),
+    assertEquals("Are you sure?", alertsPage.getAlertMessageAndClose("accept"),
             "Alert message not as expected");
-    assertTrue(alertsPage.getUrl().endsWith("simpleTest.html"),
-            "Page was not redirected, URL = " + alertsPage.getUrl());
+    assertTrue(alertsPage.getUrl().endsWith("simpleTest.html"),"Page was not redirected, URL = " + alertsPage.getUrl());
   }
-
 
   @Test
   @DisplayName("Should be able to click a link in an iframe that triggers an alert")
-  public void iframeAlertTest() {
+  public void iframeAlertTest() throws InterruptedException {
     alertsPage.switchToIframe(alertsPage.iframeWindow);
-    alertsPage.iframeLink.click();
+    alertsPage.click(alertsPage.iframeLink);
     wait.until(ExpectedConditions.alertIsPresent());
-    assertEquals("framed cheese",
-            alertsPage.getAlertMessageAndClose("accept"),
+    assertEquals("framed cheese", alertsPage.getAlertMessageAndClose("accept"),
             "Alert message not as expected");
   }
 
   @Test
   @DisplayName("Should be able to click a link in a nested iframe that triggers an alert")
-  public void nestedIframeAlertTest() {
-
+  public void nestedIframeAlertTest() throws InterruptedException {
     alertsPage.switchToIframe(alertsPage.nestedIframeWindow);
     alertsPage.switchToIframe(alertsPage.iframeWindow);
 
-    alertsPage.iframeLink.click();
+    alertsPage.click(alertsPage.iframeLink);
     wait.until(ExpectedConditions.alertIsPresent());
-    assertEquals("framed cheese",
-            alertsPage.getAlertMessageAndClose("accept"),
+    assertEquals("framed cheese", alertsPage.getAlertMessageAndClose("accept"),
             "Alert message not as expected");
   }
 

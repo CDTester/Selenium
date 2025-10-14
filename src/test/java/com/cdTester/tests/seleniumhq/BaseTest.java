@@ -75,6 +75,7 @@ public class BaseTest {
     return (ChromeDriver) driver;
   }
 
+
 //  protected static ChromeOptions getDefaultChromeOptions() {
 //    ChromeOptions options = new ChromeOptions();
 //    options.addArguments("--no-sandbox");
