@@ -1,7 +1,7 @@
 package com.cdTester.tests.seleniumhq.interactions;
 
 import com.cdTester.pages.selenium.web.Alerts;
-import com.cdTester.pages.selenium.web.Urls;
+import com.cdTester.pages.Urls;
 import com.cdTester.tests.seleniumhq.BaseTest;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;

@@ -6,7 +6,7 @@ import org.openqa.selenium.bidi.browsingcontext.BrowsingContext;
 import org.openqa.selenium.print.PrintOptions;
 import org.openqa.selenium.PrintsPage;
 import com.cdTester.tests.seleniumhq.BaseTest;
-import com.cdTester.pages.selenium.web.Urls;
+import com.cdTester.pages.Urls;
 
 import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

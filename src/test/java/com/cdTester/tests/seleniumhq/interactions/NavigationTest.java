@@ -1,7 +1,7 @@
 package com.cdTester.tests.seleniumhq.interactions;
 
 import com.cdTester.tests.seleniumhq.BaseTest;
-import com.cdTester.pages.selenium.web.Urls;
+import com.cdTester.pages.Urls;
 import com.cdTester.pages.selenium.web.Menu;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

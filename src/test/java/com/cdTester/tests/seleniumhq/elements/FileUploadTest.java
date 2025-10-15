@@ -1,13 +1,13 @@
 package com.cdTester.tests.seleniumhq.elements;
 
-import com.cdTester.pages.selenium.web.Urls;
-import com.cdTester.pages.selenium.web.Upload;
-import com.cdTester.tests.seleniumhq.BaseChromeTest;
+import com.cdTester.pages.Urls;
+import com.cdTester.pages.theInternetHerokuapp.Upload;
+import com.cdTester.tests.seleniumhq.BaseTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class FileUploadTest extends BaseChromeTest {
+public class FileUploadTest extends BaseTest {
 
   protected String filePath = "src/test/resources/";
   protected String fileName = "selenium-snapshot.png";

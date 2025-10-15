@@ -1,7 +1,7 @@
 package com.cdTester.tests.seleniumhq.elements;
 
 import com.cdTester.pages.selenium.web.Inputs;
-import com.cdTester.pages.selenium.web.Urls;
+import com.cdTester.pages.Urls;
 import com.cdTester.tests.seleniumhq.BaseTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

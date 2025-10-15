@@ -27,7 +27,7 @@ public class Highlight {
     var jsDriver = (JavascriptExecutor) driver;
     jsDriver.executeScript(
             "arguments[0].scrollIntoView(true);" +
-                    "arguments[0].style.border='3px solid red';",
+                    "arguments[0].style.border='3px solid gold';",
             element
     );
     Thread.sleep(sleep);

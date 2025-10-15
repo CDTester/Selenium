@@ -2,13 +2,11 @@ package com.cdTester.tests.seleniumhq.interactions;
 
 import com.cdTester.pages.selenium.web.Windows;
 import com.cdTester.tests.seleniumhq.BaseTest;
-import com.cdTester.pages.selenium.web.Urls;
+import com.cdTester.pages.Urls;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import java.time.Duration;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,7 +1,7 @@
 package com.cdTester.tests.seleniumhq.interactions;
 
-import com.cdTester.tests.seleniumhq.BaseChromeTest;
-import com.cdTester.pages.selenium.web.Urls;
+import com.cdTester.tests.seleniumhq.BaseTest;
+import com.cdTester.pages.Urls;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 
-public class SavingTest extends BaseChromeTest {
+public class SavingTest extends BaseTest {
   @BeforeEach
   public void createSession() {
     driver = startChromeDriver(1);

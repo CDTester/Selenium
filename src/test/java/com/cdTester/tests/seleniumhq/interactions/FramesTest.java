@@ -3,7 +3,7 @@ package com.cdTester.tests.seleniumhq.interactions;
 
 import com.cdTester.pages.selenium.web.Frames;
 import com.cdTester.pages.selenium.web.FormPage;
-import com.cdTester.pages.selenium.web.Urls;
+import com.cdTester.pages.Urls;
 import com.cdTester.tests.seleniumhq.BaseTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

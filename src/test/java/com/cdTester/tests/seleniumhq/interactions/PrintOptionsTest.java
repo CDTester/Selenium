@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.print.PageMargin;
 import org.openqa.selenium.print.PrintOptions;
 import org.openqa.selenium.print.PageSize;
-import com.cdTester.tests.seleniumhq.BaseChromeTest;
-import com.cdTester.pages.selenium.web.Urls;
+import com.cdTester.tests.seleniumhq.BaseTest;
+import com.cdTester.pages.Urls;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * ensuring that the output meets your specific requirements.
  */
 
-public class PrintOptionsTest extends BaseChromeTest {
+public class PrintOptionsTest extends BaseTest {
 
   @BeforeEach
   public void createSession() {

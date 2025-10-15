@@ -1,7 +1,7 @@
 package com.cdTester.tests.seleniumhq.interactions;
 
-import com.cdTester.tests.seleniumhq.BaseChromeTest;
-import com.cdTester.pages.selenium.web.Urls;
+import com.cdTester.tests.seleniumhq.BaseTest;
+import com.cdTester.pages.Urls;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 import java.util.List;
@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * An authenticator can be a hardware device or a software entity that stores user’s public-key credentials and retrieves them on request.
  * As the name suggests, Virtual Authenticator emulates such authenticators for testing.
  */
-public class VirtualAuthenticatorTest extends BaseChromeTest {
+public class VirtualAuthenticatorTest extends BaseTest {
 
   //  A pkcs#8 encoded encrypted RSA private key as a base64url string.
   private final static PKCS8EncodedKeySpec rsaPrivateKey = new PKCS8EncodedKeySpec(
