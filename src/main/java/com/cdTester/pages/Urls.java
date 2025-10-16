@@ -10,6 +10,7 @@ public class Urls {
   public static String frames = ConfigReader.getBaseUrl() + "selenium/web/iframes.html";
   public static String inputs = ConfigReader.getBaseUrl() + "selenium/web/inputs.html";
   public static String login = ConfigReader.getBaseUrl() + "selenium/web/login.html";
+  public static String mouseInteraction = ConfigReader.getBaseUrl() + "selenium/web/mouse_interaction.html";
   public static String upload = "https://the-internet.herokuapp.com/upload";
   public static String windows = ConfigReader.getBaseUrl() + "selenium/web/window_switching_tests/page_with_frame.html";
 

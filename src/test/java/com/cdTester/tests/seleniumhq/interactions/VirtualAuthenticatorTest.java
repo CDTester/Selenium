@@ -5,6 +5,8 @@ import com.cdTester.pages.Urls;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.InvalidArgumentException;
@@ -25,6 +27,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * As the name suggests, Virtual Authenticator emulates such authenticators for testing.
  */
 public class VirtualAuthenticatorTest extends BaseTest {
+
+  @BeforeEach
+  public void setup() {
+    startChromeDriver();
+  }
 
   //  A pkcs#8 encoded encrypted RSA private key as a base64url string.
   private final static PKCS8EncodedKeySpec rsaPrivateKey = new PKCS8EncodedKeySpec(
@@ -237,7 +244,7 @@ public class VirtualAuthenticatorTest extends BaseTest {
   @DisplayName("Should be able to remove all credential")
   public void testRemoveAllCredentials() {
     byte[] credentialId1 = {1, 2, 3, 4};
-    byte[] credentialId2 = {1, 2, 3, 4};
+    byte[] credentialId2 = {5, 6, 7, 8};
 
 
     // Crate a virtual authenticator with default options
@@ -260,7 +267,7 @@ public class VirtualAuthenticatorTest extends BaseTest {
             rsaPrivateKey,
             0
     );
-    authenticator.addCredential(residentCredential1);
+    authenticator.addCredential(residentCredential2);
 
     // Verify that the credential was added
     assertEquals(2, authenticator.getCredentials().size());

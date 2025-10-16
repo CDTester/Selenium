@@ -41,7 +41,7 @@ public class Highlight {
   public static void unhighlightElement(WebDriver driver, WebElement element) {
     var jsDriver = (JavascriptExecutor) driver;
     jsDriver.executeScript(
-            "arguments[0].style.border='0px solid white'",
+            "arguments[0].style.border=''",
             element
     );
   }
