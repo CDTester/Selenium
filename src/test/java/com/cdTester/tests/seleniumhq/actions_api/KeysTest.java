@@ -11,6 +11,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class KeysTest extends BaseTest {
@@ -27,6 +29,12 @@ public class KeysTest extends BaseTest {
 
   @AfterEach
   public void endSession() {
+    /* An important thing to note is that the driver remembers the state of all
+       the input items throughout a session. Even if you create a new instance
+       of an actions class, the depressed keys and the location of the pointer
+       will be in whatever state a previously performed action left them.
+    */
+    ((RemoteWebDriver) driver).resetInputState();
     driver.quit();
   }
 
