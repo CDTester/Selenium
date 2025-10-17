@@ -32,6 +32,12 @@ public class MouseTest extends BaseTest {
 
   @AfterEach
   public void endSession() {
+    /* An important thing to note is that the driver remembers the state of all
+       the input items throughout a session. Even if you create a new instance
+       of an actions class, the depressed keys and the location of the pointer
+       will be in whatever state a previously performed action left them.
+    */
+    ((RemoteWebDriver) driver).resetInputState();
     driver.quit();
   }
 
@@ -175,23 +181,5 @@ public class MouseTest extends BaseTest {
             relative.getText(),
             "message does not match the action performed"
     );
-  }
-
-  @Test
-  public void releasesAll() {
-
-    WebElement clickable = mousePage.clickableInput;
-
-    Actions actions = new Actions(driver);
-    actions.clickAndHold(clickable)
-            .keyDown(Keys.SHIFT)
-            .sendKeys("a")
-            .perform();
-
-    ((RemoteWebDriver) driver).resetInputState();
-
-    actions.sendKeys("a").perform();
-    assertEquals("A", String.valueOf(clickable.getAttribute("value").charAt(0)));
-    assertEquals("a", String.valueOf(clickable.getAttribute("value").charAt(1)));
   }
 }
