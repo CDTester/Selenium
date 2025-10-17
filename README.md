@@ -9,6 +9,37 @@ mvn compile
 mvn clean install
 ```
 
+## Folder Structure
+Using the Page Object Model (POM) design pattern, the folder structure is as follows:
+```
+src
+ ├─ main
+ │ ├─ java
+ │ │ └─ com.cdTester
+ │ │   ├─ pages
+ │ │   │  ├─ selenium.web
+ │ │   │  │  ├─ Alerts.java  # POM class for Alerts page
+ │ │   │  │  └─ Login.java   # POM class for Login page
+ │ │   │  └─ Urls.java       # Class for storing URLs of the selenium web pages
+ │ │   └─ Utils.java        # Utility class for common functions
+ │ └─ resources
+ │     └─ config.properties  # Configuration file for environment variables
+ ├─ test
+ │  ├─ java
+ │  │  └─ com.cdTester
+ │  │    └─ tests
+ │  │      └─ seleniumhq
+ │  │         ├─ BaseTest.java  # Base test class for setup and teardown
+ │  │         ├─ interactions  # Folder for interaction tests (click, sendKeys, etc.)
+ │  │         │  ├─ AlertsTest.java
+ │  │         │  └─ CookiesTest.java
+ │  │         └─ elements  # Folder for page object classes
+ │  │             ├── HomePage.java
+ │  │             └── LoginPage.java
+ │  └─ resources
+ │    └─ testdata.csv  # Test data file for storing test data
+```
+
 ## import drivers
 Selenium supports multiple browsers. You need to import the driver for the browser you want to use.:
 ```java
