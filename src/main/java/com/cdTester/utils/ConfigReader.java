@@ -9,8 +9,8 @@ public class ConfigReader {
   private static String environment;
 
   static {
-    // Get environment from system property or default to "qa"
-    environment = System.getProperty("env", "qa");
+    // Get environment from system property or default to "dev"
+    environment = System.getProperty("env", "dev");
     loadProperties();
   }
 
@@ -47,7 +47,8 @@ public class ConfigReader {
     return properties.getProperty("password");
   }
 
-//  public static String getBrowser() {
-//    return properties.getProperty("browser");
-//  }
+  public static String getBrowser() {
+    return properties.getProperty("browser");
+  }
+
 }

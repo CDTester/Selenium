@@ -28,12 +28,22 @@ public class BaseTest {
   protected WebDriverWait wait;
   protected String username = (ConfigReader.getUsername() != null) ? ConfigReader.getUsername() : "baseUser";
   protected String password = (ConfigReader.getPassword() != null) ? ConfigReader.getPassword() : "basePassword";
+  protected String browser = (ConfigReader.getBrowser() != null) ? ConfigReader.getBrowser() : "chrome";
   protected String trustStorePassword = "seleniumkeystore";
 
 //  public WebElement getLocatedElement(WebDriver driver, By by) {
 //    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 //    return wait.until(d -> driver.findElement(by));
 //  }
+
+  protected WebDriver startBrowserDriver() {
+    if (browser.equalsIgnoreCase("firefox")) {
+      return startFirefoxDriver();
+    }
+    else {
+      return startChromeDriver();
+    }
+  }
 
   protected FirefoxDriver startFirefoxDriver() {
     return startFirefoxDriver(new FirefoxOptions());
