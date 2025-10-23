@@ -4,9 +4,7 @@
 Add Selenium to your [POM file](pom.xml) 
 Then compile and run the project with:
 ```bash
-mvn clean
-mvn compile
-mvn clean install
+mvn clean compile
 ```
 
 ## Folder Structure
@@ -14,30 +12,31 @@ Using the Page Object Model (POM) design pattern, the folder structure is as fol
 ```
 src
  ├─ main
- │ ├─ java
- │ │ └─ com.cdTester
- │ │   ├─ pages
- │ │   │  ├─ selenium.web
- │ │   │  │  ├─ Alerts.java  # POM class for Alerts page
- │ │   │  │  └─ Login.java   # POM class for Login page
- │ │   │  └─ Urls.java       # Class for storing URLs of the selenium web pages
- │ │   └─ Utils.java        # Utility class for common functions
- │ └─ resources
- │     └─ config.properties  # Configuration file for environment variables
+ │  ├─ java
+ │  └─ resources
  ├─ test
  │  ├─ java
  │  │  └─ com.cdTester
- │  │    └─ tests
- │  │      └─ seleniumhq
- │  │         ├─ BaseTest.java  # Base test class for setup and teardown
- │  │         ├─ interactions  # Folder for interaction tests (click, sendKeys, etc.)
- │  │         │  ├─ AlertsTest.java
- │  │         │  └─ CookiesTest.java
- │  │         └─ elements  # Folder for page object classes
- │  │             ├── HomePage.java
- │  │             └── LoginPage.java
+ │  │     ├─ pages
+ │  │     │  ├─ selenium.web
+ │  │     │  │  ├─ Alerts.java  # POM class for Alerts page
+ │  │     │  │  ├─ Login.java   # POM class for Login page
+ │  │     │  │  └─ ...
+ │  │     │  └─ Urls.java       # Class for storing URLs of the selenium web pages
+ │  │     ├─ tests
+ │  │     │  └─ selenium.web
+ │  │     │     ├─ BaseTest.java  # Base test class for setup and teardown
+ │  │     │     ├─ interactions  # Folder for interaction tests (click, sendKeys, etc.)
+ │  │     │     │  ├─ AlertsTest.java
+ │  │     │     │  ├─ CookiesTest.java
+ │  │     │     │  └─ ...
+ │  │     │     └─ elements  # Folder for page object classes
+ │  │     └─ Utils.java        # Utility class for common functions
+ │  │       └─ configReader.java  # Class for reading configuration properties
  │  └─ resources
- │    └─ testdata.csv  # Test data file for storing test data
+ │    ├─ testdata.csv  # Test data file for storing test data
+ │    └─ config
+ │       └─ dev.properties  # Configuration file for environment variables
 ```
 
 ## import drivers
@@ -267,7 +266,7 @@ File destFile = new File("screenshots/" + fileName + ".png");
 //FileHandler.copy(sourceFile, destFile);
 ```
 see more examples:
-</br>[BaseTest](src/test/java/com/cdTester/tests/seleniumhq/BaseTest.java)
+</br>[BaseTest](src/test/java/com/cdTester/tests/selenium/web/BaseTest.java)
 
 ## Manage cookies
 You can manage cookies with the `manage().cookies()` method:
@@ -279,7 +278,7 @@ WebDriver chrome = chrome.manage().deleteAllCookies();
 Cookie getAll = chrome.manage().getCookies();
 Cookie getNamed = chrome.manage().getCookieNamed("testCookie");
 ```
-see more examples [CookiesTest](src/test/java/com/cdTester/tests/seleniumhq/interactions/CookiesTest.java).
+see more examples [CookiesTest](src/test/java/com/cdTester/tests/selenium/web/interactions/CookiesTest.java).
 
 
 ## Alerts
@@ -303,8 +302,6 @@ WebDriver chrome = chrome.switchTo().frame(chrome.findElement(By.tagName("iframe
 WebDriver chrome = chrome.switchTo().defaultContent();
 ```
 
-
-
 ## Quitting Session
 You can quit the browser session with the `quit()` method:
 ```java
@@ -319,17 +316,137 @@ Quit will:
 Failure to call quit will leave extra background processes and ports running on your machine which could cause you problems later.
 Some test frameworks offer methods and annotations which you can hook into to tear down at the end of a test.
 
+## JUnit 5 Annotations
+You can use JUnit 5 annotations to:
+* set up your tests (`@Before`, `@BeforeEach`, `@BeforeAll`)
+* tear down your tests (`@After`, `@AfterEach`, `@AfterAll`)
+
+```java
+import org.junit.jupiter.api.*;
+
+@BeforeEach
+public void createSession() {
+  driver = startChromeDriver(1);
+  driver.get(Urls.formPage);
+  formsPage = new FormPage(driver);
+}
+
+@AfterEach
+public void endSession() {
+  driver.quit();
+}
+```
+
+Tests can be annotated using:
+* `@Test` 
+* `@ParameterizedTest` along with `@ValueSource`, `@CsvSource`, `@MethodSource`, or `@CsvFileSource`
+
+To give tests a clearer description use `@DisplayName`
+
+To make it easier to group and filter tests, you can use `@Tag`
+
+```java
+@Test
+@Tag("smoke")
+@Tag("selectList")
+@DisplayName("Should be able to select options from a single select list")
+public void selectOption() throws InterruptedException {
+  // code...
+}
+
+@DisplayName("Should have current URL of :")
+@ParameterizedTest(name = "{0}")
+@ValueSource(strings = { "https://www.selenium.dev/", "https://docs.junit.org/current/user-guide/" })
+@Tag("driver")
+@Tag("smoke")
+public void getCurrentUrl(String UrlParam, TestReporter testReporter) {
+  // Code
+}
+
+```
+
 
 ## Running selenium tests
+### POM file
+To run 'maven-surefire-reports' add the following to your POM file.
+```xml
+<properties>
+    <groups>smoke | build</groups>
+</properties>
 
-```bash
-mvn test
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.5.4</version>
+            <configuration>
+                <groups>${groups}</groups>
+                <statelessTestsetReporter
+                        implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
+                    <usePhrasedTestCaseMethodName>true</usePhrasedTestCaseMethodName>
+                </statelessTestsetReporter>
+                <properties>
+                    <configurationParameters>
+                        junit.platform.reporting.open.xml.enabled = true
+                        junit.platform.reporting.output.dir = target/surefire-reports
+                    </configurationParameters>
+                </properties>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-report-plugin</artifactId>
+            <version>3.5.3</version>
+            <executions>
+                <execution>
+                    <phase>test</phase>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <showSuccess>true</showSuccess>
+                <alwaysGenerateSurefireReport>true</alwaysGenerateSurefireReport>
+                <outputName>Selenium ${groups} Tests</outputName>
+                <reportsDirectories>
+                    <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                </reportsDirectories>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 ```
-or to run a specific class
 
+## Run Configurations
+These tests use a configReader to read environment variables from a properties file.
+To run Junit tests from your class, we need a VM option in JUnit run configuration.
+In the navigation menu, go to Run > Edit Configurations.
+- Click on "Edit configuration templates" and select "JUnit".
+- Set the following fields: VM options: -Denv=dev
+- Apply the changes and close the dialog.
+- Click on the "+" icon to add a new configuration and select "JUnit". Set up a config like this:
+
+![JUnit Run Configuration](docs/junit_run_config.png)
+
+
+### Running Tests with Maven
+To run tests with Maven, use the following command to run all tests:
 ```bash
-mvn  -Denv=dev -Dtest="com.cdTester.tests.seleniumhq.interactions.driverTest" test surefire-report:report
+mvn clean test -Denv=dev
+```
+Or to run tests with a specific tag
+```bash
+mvn clean test -Denv=dev -Dgroups=smoke
 ```
 
-mvn exec:java -D"exec.mainClass"="dev.selenium.getting_started.FirstScript" -D"exec.classpathScope"=test -Denv=dev
+To run a specific test class, use the following command:
+```bash
+mvn  -Denv=dev -Dtest="com.cdTester.tests.selenium.web.interactions"
+```
+
+To run tests on installation:
+```bash
+mvn clean install -Denv=dev
 ```
