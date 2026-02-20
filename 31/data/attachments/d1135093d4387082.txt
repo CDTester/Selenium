@@ -1,0 +1,3 @@
+❌ Test FAILED: "https://docs.junit.org/current/user-guide/"
+Reason: Current URL is not as expected ==> expected: <https://docs.junit.org/current/user-guide/> but was: <https://docs.junit.org/6.0.3/overview.html>
+📸 Taking screenshot for failed test...
